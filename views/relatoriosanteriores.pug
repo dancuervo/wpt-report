@@ -1,0 +1,21 @@
+html
+    head
+        title= "Reports WPT"
+        style
+            include ./includes/header.pug
+            
+    
+    body
+        include ./includes/navbar.html
+
+        div(class="container")
+            div(class="row")
+            h1(class="center")
+                |Web Page Test<br>Reports
+
+            p
+                |Selecione
+            ul
+                each val, index in lista
+                    a(id=index href="./reports/" + val target="blank")
+                        li= index + ' - ' + val

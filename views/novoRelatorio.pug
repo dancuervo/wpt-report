@@ -1,0 +1,29 @@
+
+html
+    head
+        title= "Reports WPT"
+        style
+            include ./includes/header.pug
+            
+    
+    body
+        include ./includes/navbar.html
+        div(class="container")
+            h1(class="center")
+                |Painel de Relatórios<br>Web Page Test
+            hr
+            h3(class="center")
+                |Novo Relatório
+            p(id="url")
+            
+            div(class="row center")
+
+                form(name="formulario" action="/gethar" method="post")
+                    label(for="site")
+                        |URL Site
+                    input(type="text" name="site" size="50" required)
+                    label(for="url")
+                        |HASH .har<br>https://www.webpagetest.org/export.php?bodies=1&pretty=1&test=<b>HASH</b>
+                    input(type="text" name="hash" size="50" required)
+                    br
+                    input( type="submit" value="Criar Relatório")
