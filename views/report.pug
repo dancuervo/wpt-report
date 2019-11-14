@@ -3,25 +3,37 @@ html
         title= "Reports WPT"
         style
             include ./includes/header.pug
-    - var date = new Date(lista.entradas[0].startedDateTime)
+        style .grey{background-color:grey;color:white;padding:4px;}.detalles{font-size:2em;background-color:grey;color:white;padding:4px;}
+    if lista.entradas[0].startedDateTime
+        - var date = new Date(lista.entradas[0].startedDateTime)
+        - var dia = date.getDay()
+        - var mes = date.getMonth()
+        - var ano = date.getFullYear()
+        - var data = dia +"/"+mes+"/"+ano
+    else
+        - var data = "Sem data"
 
     body
         include ./includes/navbar.html
         div(class=" center")
-            h1 Caso: #{caso}
-            h3 Data: #{date.getDay()}/#{date.getMonth()}/#{date.getFullYear()}
+            h2 Caso: #{caso} - Teste: #{data}
+            span(id='gpt' class="detalles")
+            span(id='impl' class="detalles")
+            span(id="ads" class="detalles")
+            span(id="view" class="detalles")
         div(class="row")
             div(class="one column")
             div(class="two columns") <b>Start - Download Time</b>
             div(class="nine columns") <b># - URL</b>
             hr
-            
+        - var i =  1 //número de request para crear ID
         each val in lista.entradas
             div(class="row")
                 div(class="one column")
-                div(class="two columns") Req Start: [#{val.req_start}]ms <br> Total Download Time:[ #{val.total_download_time} ]ms<br> Request Ready: #{val.req_ready}sec
-                div(class="nine columns") #{val.request} - #{val.url}
+                div(class="two columns") Req Start: #{val.req_start}ms <br> Request Ready: #{val.req_ready}sec <br> <span class="grey">Total Download Time:[ #{val.total_download_time} ]ms
+                div(class="nine columns") #{val.request} - <span id="#{i}" class="req" data-totalDownloadTime="#{ val.total_download_time}">#{val.url}</span>
             hr
-            
+            - i++
+        include ./includes/buscador.html
                     
                 

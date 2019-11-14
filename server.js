@@ -46,7 +46,7 @@ app.post('/gethar', urlencodedParser, (req, res) => {
     }else{
         console.log('error al recuperar .HAR de WPT');
     }
-    res.redirect('/listarelatorios');
+    res.redirect('listarelatorios');
 });
 
 //renderiza report json 
@@ -54,7 +54,7 @@ app.get('/reports/:id', (req, res) => {
     let id = req.params.id;
     let lista = require(`./reports/${id}`);
     lista = JSON.stringify(lista);
-    res.render('./report', { caso: id, lista: JSON.parse(lista) });
+    res.render('report', { caso: id, lista: JSON.parse(lista) });
 });
 
 app.get('/about', (req, res) => {

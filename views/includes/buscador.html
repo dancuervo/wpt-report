@@ -1,0 +1,64 @@
+<script>
+    var arr = ['gpt.js', 'pubads_impl', '/ads?','/view?'];
+    //busca gpt.js en lista requests
+var req = document.getElementsByClassName('req');
+//GPT.JS
+function buscaGPT(req){
+	console.log(req);
+	for (var i = 0; i < req.length; i++){
+		var n = req[i].innerHTML;
+		if (n.includes('gpt.js')) {
+            console.log("request gpt"+i);
+            var gpt = document.getElementById('gpt');
+            gpt.innerHTML = "gpt.js: [req "+req[i].id+"] "+req[i].dataset.totaldownloadtime+"ms";
+            return;
+        }
+    }
+}
+//pub_impl
+function buscaImpl(req){
+	console.log(req);
+	for (var i = 0; i < req.length; i++){
+		var n = req[i].innerHTML;
+		if (n.includes('pubads_impl')) {
+            console.log("request impl"+i);
+            var impl = document.getElementById('impl');
+            impl.innerHTML = " || /pubads_impl: [req "+req[i].id+"] "+req[i].dataset.totaldownloadtime+"ms";
+            return;
+        }
+    }
+}
+// /ads?
+function buscaADS(req){
+	console.log(req);
+	for (var i = 0; i < req.length; i++){
+		var n = req[i].innerHTML;
+		if (n.includes('/ads?')) {
+            console.log("request ads"+i);
+            var ads = document.getElementById('ads');
+            ads.innerHTML = " || /ads?: [req "+req[i].id+"] "+req[i].dataset.totaldownloadtime+"ms";
+            return;
+        }
+    }
+}
+// /view?
+
+function buscaVIEW(req){
+	console.log(req);
+	for (var i = 0; i < req.length; i++){
+		var n = req[i].innerHTML;
+		if (n.includes('/view?')) {
+            console.log("request view"+i);
+            var view = document.getElementById('view');
+            view.innerHTML = " || /view?: [req "+req[i].id+"] "+req[i].dataset.totaldownloadtime+"ms";
+            return;
+        }
+    }
+}
+
+buscaGPT(req);
+buscaImpl(req);
+buscaADS(req);
+buscaVIEW(req);
+
+</script>
