@@ -3,27 +3,25 @@ html
         title= "Reports WPT"
         style
             include ./includes/header.pug
-            
-    
+    - var date = new Date(lista.entradas[0].startedDateTime)
+
     body
         include ./includes/navbar.html
-        div(class="container")
-            div(class="row")
+        div(class=" center")
             h1 Caso: #{caso}
-            a(href="/")
-                button
-                    |HOME<br>
-
-            div(class="row")
-                div(class="four columns") <b>Start - Download Time</b>
-                div(class="eight columns") <b># - URL</b>
-                hr
+            h3 Data: #{date.getDay()}/#{date.getMonth()}/#{date.getFullYear()}
+        div(class="row")
+            div(class="one column")
+            div(class="two columns") <b>Start - Download Time</b>
+            div(class="nine columns") <b># - URL</b>
+            hr
             
-            each val in lista.entradas
-                div(class="row")
-                    div(class="four columns") Req Start: [#{val.req_start}]ms <br> Total Download Time:[ #{val.total_download_time} ]ms<br> Request Ready: #{val.req_ready}sec
-                    div(class="eight columns") #{val.request} - #{val.url}
-                hr
+        each val in lista.entradas
+            div(class="row")
+                div(class="one column")
+                div(class="two columns") Req Start: [#{val.req_start}]ms <br> Total Download Time:[ #{val.total_download_time} ]ms<br> Request Ready: #{val.req_ready}sec
+                div(class="nine columns") #{val.request} - #{val.url}
+            hr
             
                     
                 
