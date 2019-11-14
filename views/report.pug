@@ -30,7 +30,7 @@ html
         each val in lista.entradas
             div(class="row")
                 div(class="one column")
-                div(class="two columns") Req Start: #{val.req_start}ms <br> Request Ready: #{val.req_ready}sec <br> <span class="grey">Total Download Time:[ #{val.total_download_time} ]ms
+                div(class="two columns") Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span class="grey">Request Ready: #{val.req_ready}sec</span> 
                 div(class="nine columns") #{val.request} - <span id="#{i}" class="req" data-totalDownloadTime="#{ val.total_download_time}">#{val.url}</span>
             hr
             - i++
