@@ -1,71 +1,28 @@
 <script>
 
-    //busca gpt.js en lista requests
+    //busca la primera ocurrencia de cada script en la lista de requests, lo destaca y crea menu de navegacion con el tiempo total de descarga y acceso rapido
 
-var req = document.getElementsByClassName('req');
+    var req = document.getElementsByClassName('req');
 
-    //GPT.JS
-    function buscaGPT(req) {
-        for (var i = 0; i < req.length; i++) {
-            var n = req[i].innerHTML;
-            if (n.includes('gpt.js')) {
-                var gpt = document.getElementById('gpt');
-                document.querySelector("#" + CSS.escape(req[i].id) + "").parentElement.style.background = '#0FA0CE';
-                gpt.innerHTML = "gpt.js: <a href=#" + i + ">[req " + req[i].id + "]</a> " + req[i].dataset.totaldownloadtime + "ms";
-                return
-            }
-        }
-    }
-
-    //pub_impl
-    function buscaImpl(req) {
-        for (var i = 0; i < req.length; i++) {
-            var n = req[i].innerHTML;
-            if (n.includes('pubads_impl')) {
-                var impl = document.getElementById('impl');
-                document.querySelector("#" + CSS.escape(req[i].id) + "").parentElement.style.background = '#0FA0CE';
-                impl.innerHTML = " || /pubads_impl: <a href=#" + i + ">[req " + req[i].id + "]</a>" + req[i].dataset.totaldownloadtime + "ms";
-                return;
-            }
-        }
-    }
-    // /ads?
-    function buscaADS(req) {
-        for (var i = 0; i < req.length; i++) {
-            var n = req[i].innerHTML;
-            if (n.includes('/ads?')) {
-                var ads = document.getElementById('ads');
-                document.querySelector("#" + CSS.escape(req[i].id) + "").parentElement.style.background = '#0FA0CE';
-                ads.innerHTML = " || /ads?: <a href=#" + i + ">[req " + req[i].id + "]</a> " + req[i].dataset.totaldownloadtime + "ms";
-                return;
-            }
-        }
-    }
-    // /view?
-
-    function buscaVIEW(req) {
-        for (var i = 0; i < req.length; i++) {
-            var n = req[i].innerHTML;
-            if (n.includes('/view?')) {
-                var view = document.getElementById('view');
-                document.querySelector("#" + CSS.escape(req[i].id) + "").parentElement.style.background = '#0FA0CE';
-                view.innerHTML = " || /view?: <a href=#" + i + ">[req " + req[i].id + "]</a>" + req[i].dataset.totaldownloadtime + "ms";
-                return;
-            }
-        }
-    }
-
-    buscaGPT(req);
-    buscaImpl(req);
-    buscaADS(req);
-    buscaVIEW(req);
-
-
-/*
-    function busca() {
+    function busca(req) {
         var tagArr = ['gpt.js', 'pubads_impl', '/ads?', '/view?'];
-        var idArr = ['gpt', 'impl', 'ads', 'view'];
-}
-*/
+        for (var k = 0; k < tagArr.length; k++) {
 
+            function buscaArr(req, tagArr, k) {
+                var idArr = ['gpt', 'impl', 'ads', 'view'];
+
+                for (var i = 0; i < req.length; i++) {
+                    var n = req[i].innerHTML;
+                    if (n.includes(tagArr[k])) {
+                        var nav = document.getElementById(idArr[k]);
+                        document.querySelector("#" + CSS.escape(req[i].id) + "").parentElement.style.background = '#0FA0CE';
+                        nav.innerHTML = " || " + idArr[k] + ": <a href=#" + i + ">[req " + req[i].id + "]</a>" + req[i].dataset.totaldownloadtime + "ms";
+                        return;
+                    }
+                }
+            }
+            buscaArr(req, tagArr, k);
+        }
+    }
+    busca(req);
 </script>
