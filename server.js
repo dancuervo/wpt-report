@@ -51,10 +51,10 @@ app.post('/gethar', urlencodedParser, (req, res) => {
 
 //renderiza report json 
 app.get('/reports/:id', (req, res) => {
-    let id = req.params.id;
-    let lista = require(`./reports/${id}`);
+    
+    let lista = require(`./reports/${req.params.id}`);
     lista = JSON.stringify(lista);
-    res.render('report', { caso: id, lista: JSON.parse(lista) });
+    res.render('report', { caso: req.params.id, lista: JSON.parse(lista) });
 });
 
 app.get('/about', (req, res) => {

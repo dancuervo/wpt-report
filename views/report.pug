@@ -3,11 +3,11 @@ html
         title= "Reports WPT"
         style
             include ./includes/header.pug
-        style .grey{background-color:grey;color:white;padding:4px;}.detalles{font-size:2em;background-color:grey;color:white;padding:4px;}
-    if lista.entradas[0].startedDateTime
-        - var date = new Date(lista.entradas[0].startedDateTime)
-        - var dia = date.getDay()
-        - var mes = date.getMonth()
+        style .grey {background-color:grey;color:white;padding:4px;}.detalles{font-size:2em;background-color:grey;color:white;padding:4px;}
+    if lista.entradas.no_cached[0].startedDateTime
+        - var date = new Date(lista.entradas.no_cached[0].startedDateTime)
+        - var dia = date.getDate()
+        - var mes = date.getMonth() + 1
         - var ano = date.getFullYear()
         - var data = dia +"/"+mes+"/"+ano
     else
@@ -17,23 +17,59 @@ html
         include ./includes/navbar.html
         div(class=" center")
             h2 Caso: #{caso} - Teste: #{data}
-            span(id='gpt' class="detalles")
-            span(id='impl' class="detalles")
-            span(id="ads" class="detalles")
-            span(id="view" class="detalles")
+            h4(id="top")
+                a(href="#first") First View 
+            span(id='first_gpt' class="detalles") gpt -
+            span(id='first_impl' class="detalles") pub_impl -
+            span(id="first_ads" class="detalles") /ads? -
+            span(id="first_view" class="detalles") /view?
+            
+            h4
+                a(href="#second") Second View
+
+            span(id='repeated_gpt' class="detalles") No gtp ||
+            span(id='repeated_impl' class="detalles") No pub_impl ||
+            span(id="repeated_ads" class="detalles") /ads? -
+            span(id="repeated_view" class="detalles") /view?
+
+        div(class="row")
+            h1
+                a(href="#top") First view
         div(class="row")
             div(class="one column")
             div(class="two columns") <b>Start - Download Time</b>
             div(class="nine columns") <b># - URL</b>
             hr
+        //Entradas sin cache - first view
+        
         - var i =  1 //número de request para crear ID
-        each val in lista.entradas
-            div(class="row")
-                div(class="one column")
-                div(class="two columns") Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span class="grey">Request Ready: #{val.req_ready}sec</span> 
-                div(class="nine columns") #{val.request} - <span id="#{i}" class="req" data-totalDownloadTime="#{ val.total_download_time}">#{val.url}</span>
+        each val in lista.entradas.no_cached
+            div(class="row"  id="first")
+                div(class="one column" style='background-color: mediumseagreen;text-align:center') First
+                div(class="two columns") Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span class="grey">Request Ready: #{val.req_ready} sec</span> 
+                div(class="nine columns") #{val.request} - <span id="first#{i}" class="first_req" data-req_ready="#{val.req_ready}">#{val.url}</span>
             hr
             - i++
+
+        div(class="row" id="second")
+            h1
+                a(href="#top") Second view
+        if lista.entradas.cached
+            //Entradas cacheadas - second view
+            - var i = 1
+            each val in lista.entradas.cached
+                div(class="row")
+                    div(class="one column" style="background-color: tomato;text-align:center'") Second
+                    div(class="two columns") Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span class="grey">Request Ready: #{val.req_ready} sec</span> 
+                    div(class="nine columns") #{val.request} - <span id="repeated#{i}" class="repeated_req" data-req_ready="#{ val.req_ready}">#{val.url}</span>
+                    hr
+                    - i++
+        else
+            h1
+                |Sin datos de second view
+        //crea panel con pings criticos de gpt para menu superior
+        a(href='#top' style='position:fixed;right:10px;bottom:10px;')
+            button Top
         include ./includes/buscador.html
                     
                 

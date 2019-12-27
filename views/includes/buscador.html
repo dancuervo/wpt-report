@@ -1,28 +1,39 @@
 <script>
 
     //busca la primera ocurrencia de cada script en la lista de requests, lo destaca y crea menu de navegacion con el tiempo total de descarga y acceso rapido
-
-    var req = document.getElementsByClassName('req');
-
-    function busca(req) {
+    let busca = (reqs, i, idArr) => {
         var tagArr = ['gpt.js', 'pubads_impl', '/ads?', '/view?'];
-        for (var k = 0; k < tagArr.length; k++) {
+        for (var k = 0; k < reqs.length; k++) {
+            var reqTitle = reqs[k].innerHTML;
+            if (reqTitle.includes(tagArr[i])) {
+                var j = 1;
+                var nav = document.getElementById(idArr[i]);
+                document.querySelector("#" + CSS.escape(reqs[k].id) + "").parentElement.style.background = '#0FA0CE';
+                nav.innerHTML = " || " + idArr[i] + ": <a href=#" + reqs[k].id + ">[req " + (j += k) + "]</a> " + reqs[k].dataset.req_ready + "ms ||";
 
-            function buscaArr(req, tagArr, k) {
-                var idArr = ['gpt', 'impl', 'ads', 'view'];
-
-                for (var i = 0; i < req.length; i++) {
-                    var n = req[i].innerHTML;
-                    if (n.includes(tagArr[k])) {
-                        var nav = document.getElementById(idArr[k]);
-                        document.querySelector("#" + CSS.escape(req[i].id) + "").parentElement.style.background = '#0FA0CE';
-                        nav.innerHTML = " || " + idArr[k] + ": <a href=#" + i + ">[req " + req[i].id + "]</a>" + req[i].dataset.totaldownloadtime + "ms";
-                        return;
-                    }
-                }
+                return;
             }
-            buscaArr(req, tagArr, k);
         }
     }
-    busca(req);
+
+
+    let firstView = () => {
+        var reqs = document.getElementsByClassName('first_req');
+        var idArr = ['first_gpt', 'first_impl', 'first_ads', 'first_view'];
+        for (var i = 0; i < 4; i++) {
+            busca(reqs, i, idArr);
+        }
+    }
+
+    let repeatedView = () => {
+        var reqs = document.getElementsByClassName('repeated_req');
+        var idArr = ['repeated_gpt', 'repeated_impl', 'repeated_ads', 'repeated_view'];
+        for (var i = 0; i < 4; i++) {
+            busca(reqs, i, idArr);
+        }
+    }
+    
+    firstView()
+    repeatedView()
+
 </script>

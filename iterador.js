@@ -1,12 +1,6 @@
-module.exports.reportJSON = function (){
-
-    const report = require('./har/www.brasil247.com.191105_8K_691cc03c178613c084f5cc7fcceb3462.json');
-
-    return report;
-}
 //function importarJSON() {
  
-module.exports.listarRequest = function (report) {
+module.exports.listarRequest = (report) => {
     //exhibe las requests
     let entriesArr = report.log.entries;
     let lista = [];
@@ -36,6 +30,3 @@ module.exports.listarRequest = function (report) {
     }
     console.log("\nENTRADAS 1er Test: [" + lista.length + "]\nRequest del primer test (sin cache).\nENTRADAS todos los test: " + entriesArr.length );
 }
-
-
-console.log('hey');
