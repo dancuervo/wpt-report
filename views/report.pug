@@ -15,7 +15,7 @@ html
 
     body
         include ./includes/navbar.html
-        div(class=" center")
+        div(class="center")
             h2 Caso: #{caso} - Teste: #{data}
             h4(id="top")
                 a(href="#first") First View 
@@ -33,10 +33,23 @@ html
             span(id="repeated_view" class="detalles") /view?
 
         div(class="row")
+            div(class="one column")
+                |&#8291;
+            div(class="ten columns")
+                hr
+                p(id="ping_times" style="font-size:2em;font-family:'Sans Serif';text-align:center")
+                canvas(id="time-report" height="600" width="1600")
+                hr
+            //include graph.js bellow
+            div(class="one column")
+                |&#8291;
+
+        div(class="row" id="first")
             h1
                 a(href="#top") First view
         div(class="row")
             div(class="one column")
+                |&#8291;
             div(class="two columns") <b>Start - Download Time</b>
             div(class="nine columns") <b># - URL</b>
             hr
@@ -44,8 +57,8 @@ html
         
         - var i =  1 //número de request para crear ID
         each val in lista.entradas.no_cached
-            div(class="row"  id="first")
-                div(class="one column" style='background-color: mediumseagreen;text-align:center') First
+            div(class="row")
+                div(class="one column" style='background-color: mediumseagreen;text-align:center') &#8291;
                 div(class="two columns") Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span class="grey">Request Ready: #{val.req_ready} sec</span> 
                 div(class="nine columns") #{val.request} - <span id="first#{i}" class="first_req" data-req_ready="#{val.req_ready}">#{val.url}</span>
             hr
@@ -59,7 +72,7 @@ html
             - var i = 1
             each val in lista.entradas.cached
                 div(class="row")
-                    div(class="one column" style="background-color: tomato;text-align:center'") Second
+                    div(class="one column" style="background-color: tomato;text-align:center'") &#8291;
                     div(class="two columns") Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span class="grey">Request Ready: #{val.req_ready} sec</span> 
                     div(class="nine columns") #{val.request} - <span id="repeated#{i}" class="repeated_req" data-req_ready="#{ val.req_ready}">#{val.url}</span>
                     hr
@@ -68,8 +81,15 @@ html
             h1
                 |Sin datos de second view
         //crea panel con pings criticos de gpt para menu superior
+        a(href='#first' style='position:fixed;right:10px;bottom:110px;')
+            button 1st
+        a(href='#second' style='position:fixed;right:10px;bottom:60px;')
+            button 2nd
         a(href='#top' style='position:fixed;right:10px;bottom:10px;')
             button Top
         include ./includes/buscador.html
+        
+        script
+            include ./includes/graph.js
                     
                 

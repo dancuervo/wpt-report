@@ -19,13 +19,13 @@ Content Download: _download_ms
 */
 
 //recibe el req.body de un post con los datos: url de la cuenta y .har de la prueba realizada por WPT
-module.exports.obtenerHAR = function (req, fetch) {
+module.exports.obtenerHAR = (req, fetch) => {
     let harReq = 'https://www.webpagetest.org/export.php?bodies=1&pretty=1&test=';
     let url = req.body.site;
     let hash = req.body.hash;
     let getHar = harReq + hash;
 
-    async function Data(getHar, url) {
+    let Data = async (getHar, url) => {
         await fetch(getHar)
             .then(
                 (response) => {
@@ -57,7 +57,7 @@ module.exports.obtenerHAR = function (req, fetch) {
     Data(getHar, url);
 }
 
-function harToJson(data, url) {
+let harToJson = (data, url) => {
     //exhibe las requests
     
     let date = data.log.pages[0].startedDateTime;

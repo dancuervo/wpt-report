@@ -9,7 +9,7 @@
                 var j = 1;
                 var nav = document.getElementById(idArr[i]);
                 document.querySelector("#" + CSS.escape(reqs[k].id) + "").parentElement.style.background = '#0FA0CE';
-                nav.innerHTML = " || " + idArr[i] + ": <a href=#" + reqs[k].id + ">[req " + (j += k) + "]</a> " + reqs[k].dataset.req_ready + "ms ||";
+                nav.innerHTML = " || " + idArr[i] + ": <a href=#" + reqs[k].id + ">[req " + (j += k) + "]</a> " + "<span id="+ idArr[i] + "-val"+">" + reqs[k].dataset.req_ready + "ms</span> ||";
 
                 return;
             }
