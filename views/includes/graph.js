@@ -32,7 +32,7 @@ total_view_second = parseInt(total_view_second) / 1000
 total_view_second = parseFloat(total_view_second).toFixed(1)
 //PANEL ping_times
 var ping_times = document.querySelector('#ping_times')
-ping_times.innerHTML = "<span style='color:#4885ed;'>" + total_gpt + "sec &ensp; </span><span style='color:#3cba54;'>" + total_pub_impl + "sec &ensp; </span><span style='color:#f4c20d;'>" + total_ad + "sec &ensp; </span><span style='color:#db3236;'>" + total_view + "sec &ensp; </span>"
+ping_times.innerHTML = "<span style='color:#4885ed;'>gpt.js  &ensp; &ensp;  </span><span style='color:#3cba54;'>pub_impl  &ensp; &ensp; </span><span style='color:#f4c20d;'>ad req &ensp; &ensp;  </span><span style='color:#db3236;'>ad render &ensp; &ensp;  </span><br><span style='color:#4885ed;'>" + total_gpt + "sec &ensp; &ensp;</span><span style='color:#3cba54;'>&ensp;" + total_pub_impl + "sec &ensp; &ensp; </span><span style='color:#f4c20d;'>&ensp;" + total_ad + "sec &ensp; </span><span style='color:#db3236;'>&ensp;" + total_view + "sec &ensp; </span>"
 //total pixels of x axis based in /view?'s ping
 var x_units = 1400
 var x_percentage = x_units / total_view
@@ -107,8 +107,8 @@ let line_gpt = (total_gpt) => {
     b.fill() 
     b.stroke()
     //LABEL
-    b.font = '30px Sans Serif'
-    b.fillText('gpt.js',x - 30,y - 30)
+    //b.font = '30px Sans Serif'
+    //b.fillText('gpt.js',x - 30,y - 30)
 
     return
 }
@@ -116,7 +116,7 @@ let line_gpt = (total_gpt) => {
 let line_pub_impl = (total_pub_impl) => {
     var b = canvas.getContext('2d')
     var x = total_pub_impl
-    y = y_height + 125
+    y = y_height + 150
 
     var color = '#3cba54'
     b.fillStyle = color
@@ -131,8 +131,8 @@ let line_pub_impl = (total_pub_impl) => {
     b.fill() 
     b.stroke()
     //LABEL
-    b.font = '30px Sans Serif'
-    b.fillText('pub_impl',x - 30,y - 30)
+    //b.font = '30px Sans Serif'
+    //b.fillText('pub_impl',x - 30,y - 30)
 
     return
 }
@@ -140,7 +140,7 @@ let line_pub_impl = (total_pub_impl) => {
 let line_ad = (total_ad) => {
     var b = canvas.getContext('2d')
     var x = total_ad
-    y = y_height + 100
+    y = y_height + 75
     var color = '#f4c20d'
     b.fillStyle = color
     b.strokeStyle = color
@@ -154,8 +154,8 @@ let line_ad = (total_ad) => {
     b.fill() 
     b.stroke()
     //LABEL
-    b.font = '30px Sans Serif'
-    b.fillText('/ads?',x - 30,y - 30)
+    //b.font = '30px Sans Serif'
+    //b.fillText('/ads?',x - 30,y - 30)
 
     return
 }
@@ -177,8 +177,8 @@ let line_view = (x_units) => {
     b.fill()
     b.stroke()
     //LABEL
-    b.font = '30px Sans Serif'
-    b.fillText('/view?',x - 30,y - 30)
+    //b.font = '30px Sans Serif'
+    //b.fillText('/view?',x - 30,y - 30)
 
     return
 }
@@ -186,7 +186,7 @@ let line_view = (x_units) => {
 let line_ad_second = (total_ad_second) => {
     var b = canvas.getContext('2d')
     var x = total_ad_second
-    y = y_height + 50
+    y = y_height 
     var color = '#d3d3d3'
     b.fillStyle = color
     b.strokeStyle = color
@@ -201,7 +201,7 @@ let line_ad_second = (total_ad_second) => {
     b.stroke()
     //LABEL
     b.font = '30px Sans Serif'
-    b.fillText('2nd /ad?',x - 30,y - 30)
+    b.fillText('ad req',x - 30,y - 30)
 
     return
 }
@@ -224,7 +224,7 @@ let line_view_second = (total_view_second) => {
     b.stroke()
     //LABEL
     b.font = '30px Sans Serif'
-    b.fillText('2nd /view?',x - 30,y - 30)
+    b.fillText('ad render',x - 30,y - 30)
 
     return
 }

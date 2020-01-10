@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //require HTTP
 const http = require('http');
 //require body-parser para tratar POST requests
@@ -21,7 +23,9 @@ const wptReport = require('./app.js');
 const listarelatorios = wptReport.listarelatorios;
 const DownloadtHAr = wptReport.obtenerHAR;
 const harToJson = wptReport.reportJSON;
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 app.get('/', (req, res) => {
     res.render(`index`);
 })
