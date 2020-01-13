@@ -1,5 +1,4 @@
 "use strict";
-
 //X axis proporcional  tiempo para /view?
 //variables
 // T = total_download_time in miliseconds to /view?
@@ -29,7 +28,7 @@ var crearGrafico = function () {
     total_view_second = parseFloat(total_view_second).toFixed(1);
     //PANEL ping_times
     var ping_times = document.querySelector('#ping_times');
-    ping_times.innerHTML = "<table style='font-size:0.8em'><tr><td style='color:#4885ed;'>gpt.js<br/>" + total_gpt +"sec</td><td style='color:#3cba54;'>pub_impl<br/>" + total_pub_impl + "sec</td><td style='color:#f4c20d;'>ad req<br/>" + total_ad + "sec</td><td style='color:#db3236;'>ad render<br/>" + total_view + "sec</td></tr></table>"
+    ping_times.innerHTML = "<table style='font-size:0.8em'><tr><td style='color:#4885ed;'>gpt.js<br/>" + total_gpt + "sec</td><td style='color:#3cba54;'>pub_impl<br/>" + total_pub_impl + "sec</td><td style='color:#f4c20d;'>ad req<br/>" + total_ad + "sec</td><td style='color:#db3236;'>ad render<br/>" + total_view + "sec</td></tr></table>";
     //total pixels of x axis based in /view?'s ping
     var x_units = 1400;
     var x_percentage = x_units / total_view;
