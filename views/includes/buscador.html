@@ -2,7 +2,7 @@
 
     //busca la primera ocurrencia de cada script en la lista de requests, lo destaca y crea menu de navegacion con el tiempo total de descarga y acceso rapido
     let busca = (reqs, i, idArr) => {
-        var tagArr = ['gpt.js', 'pubads_impl', '/ads?', '/view?'];
+        var tagArr = ['gpt.js', 'pubads_impl', '/ads?', '/view?', '/adview?'];
         for (var k = 0; k < reqs.length; k++) {
             var reqTitle = reqs[k].innerHTML;
             if (reqTitle.includes(tagArr[i])) {
@@ -19,16 +19,18 @@
 
     let firstView = () => {
         var reqs = document.getElementsByClassName('first_req');
-        var idArr = ['first_gpt', 'first_impl', 'first_ads', 'first_view'];
-        for (var i = 0; i < 4; i++) {
+        var idArr = ['first_gpt', 'first_impl', 'first_ads', 'first_view', 'first_view'];
+        
+        for (var i = 0; i < idArr.length; i++) {
             busca(reqs, i, idArr);
         }
     }
 
     let repeatedView = () => {
         var reqs = document.getElementsByClassName('repeated_req');
-        var idArr = ['repeated_gpt', 'repeated_impl', 'repeated_ads', 'repeated_view'];
-        for (var i = 0; i < 4; i++) {
+        var idArr = ['repeated_gpt', 'repeated_impl', 'repeated_ads', 'repeated_view', 'repeated_view'];
+        
+        for (var i = 0; i < idArr.length; i++) {
             busca(reqs, i, idArr);
         }
     }

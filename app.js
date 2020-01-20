@@ -124,7 +124,7 @@ let harToJson = (data, url) => {
     requests['entradas'] = lista;
     requests = JSON.stringify(requests);
     //guarda el report
-    let OutFile = `./reports/[new_model]${url}-WPTreport.json`;
+    let OutFile = `./reports/${url}-WPTreport.json`;
     let fs = require('fs');
     fs.writeFile(OutFile, requests, (error) => {
         if (error) throw error;
