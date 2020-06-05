@@ -206,3 +206,11 @@ var line_view_second = function (total_view_second) {
 };
 //
 crearGrafico();
+
+/*
+let medeAltura = ()=>{
+    let c = document.body.scrollHeight
+    let d = window.innerHeight
+    return `Relação altura documento com  altura viewport: ${c/d}`
+}
+*/
