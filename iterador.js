@@ -7,6 +7,7 @@ module.exports.listarRequest = (report) => {
     for (let i = 0; i < entriesArr.length; i++) {
         //los valores de 0 se representan como -1 y rompen la suma
         let totalTime;
+        let totalSize;
         let arrInd = entriesArr[i]._index + 1;
 
         if (entriesArr[i]._dns_ms == -1) { entriesArr[i]._dns_ms = 0 };
@@ -17,6 +18,8 @@ module.exports.listarRequest = (report) => {
         
         //total download time de cada request
         totalTime = entriesArr[i]._dns_ms + entriesArr[i]._connect_ms + entriesArr[i]._ssl_ms + entriesArr[i]._ttfb_ms + entriesArr[i]._download_ms;
+        //total KBs de cada recurso
+       // totalSize = entriesArr[i].total_kb_download;
 
         //agrega los request a la lista si pertenecen al primer test - '_cached: 0'
         if (entriesArr[i]._cached == 0) {

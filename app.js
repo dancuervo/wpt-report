@@ -80,6 +80,7 @@ let harToJson = (data, url) => {
         totalTime = entriesArr[i]._dns_ms + entriesArr[i]._connect_ms + entriesArr[i]._ssl_ms + entriesArr[i]._ttfb_ms + entriesArr[i]._download_ms;
         //request completada
         req_ready = entriesArr[i]._load_start + totalTime;
+        //totalSize = entriesArr[i].total_kb_download;
 
         //agrega los request a la lista si pertenecen al primer test - '_cached: 0'
         if (entriesArr[i]._cached === 0) {
@@ -90,7 +91,7 @@ let harToJson = (data, url) => {
             entradas['request'] = entriesArr[i]._number;
             entradas['url'] = entriesArr[i]._full_url;
             entradas['req_start'] = entriesArr[i]._load_start;
-            entradas['total_kb_download'] = entriesArr[i]._load_start;
+            entradas['total_kb_download'] = entriesArr[i]._objectSize;
             entradas['total_download_time'] = totalTime;
             entradas['req_ready'] = req_ready;
             entradas['startedDateTime'] = date;
@@ -108,7 +109,7 @@ let harToJson = (data, url) => {
             entradas_cacheadas['request'] = entriesArr[i]._number;
             entradas_cacheadas['url'] = entriesArr[i]._full_url;
             entradas_cacheadas['req_start'] = entriesArr[i]._load_start;
-            entradas_cacheadas['total_kb_download'] = entriesArr[i]._load_start;
+            entradas_cacheadas['total_kb_download'] = entriesArr[i]._objectSize;
             entradas_cacheadas['total_download_time'] = totalTime;
             entradas_cacheadas['req_ready'] = req_ready;
             entradas_cacheadas['startedDateTime'] = date;

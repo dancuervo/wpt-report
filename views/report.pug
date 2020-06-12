@@ -59,7 +59,8 @@ html
         each val in lista.entradas.no_cached
             div(class="row")
                 div(class="one column" style='background-color: mediumseagreen;text-align:center') &#8291;
-                div(class="two columns") ##{val.request} Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span class="grey">Request Ready: #{val.req_ready} sec</span> 
+                div(class="two columns") ##{val.request} Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>
+                    <span class="grey">Request Ready: #{val.req_ready} sec</span><br><span class="grey">Size: #{val.total_kb_download / 1000} KB</span> 
                 div(class="nine columns") <span id="first#{i}" class="first_req" data-req_ready="#{val.req_ready}">#{val.url}</span>
             hr
             - i++
