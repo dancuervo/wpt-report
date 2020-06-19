@@ -3,7 +3,7 @@ html
         title= "Reports WPT"
         style
             include ./includes/header.pug
-        style .grey {background-color:grey;color:white;padding:4px;}.detalles{font-size:2em;background-color:grey;color:white;padding:4px;}
+        
     if lista.entradas.no_cached[0].startedDateTime
         - var date = new Date(lista.entradas.no_cached[0].startedDateTime)
         - var dia = date.getDate()
@@ -18,7 +18,9 @@ html
         div(class="center")
             h2 Caso: #{caso} - Teste: #{data}
             h4(id="top")
-                a(href="#first") First View 
+                a(href="#first") First View
+            h6
+                a(href="#total_load") Total Size
             span(id='first_gpt' class="detalles") gpt -
             span(id='first_impl' class="detalles") pub_impl -
             span(id="first_ads" class="detalles") /ads? -
@@ -54,18 +56,30 @@ html
             div(class="nine columns") <b># - URL</b>
             hr
         //Entradas sin cache - first view
+        //lista - muestra detalles de cada request y la suma de KB de recursos hasta el request corriente
         - var i =  1 //número de request para crear ID
+        - var total_size_till_now_sum = 0
+
         each val in lista.entradas.no_cached
             //total kb of each resource
             - var weight = val.total_kb_download / 1000
+            - var kb = weight.toFixed(4)
+            - total_size_till_now_sum += parseInt(kb)
 
             div(class="row")
                 div(class="one column" style='background-color: mediumseagreen;text-align:center') &#8291;
-                div(class="two columns") ##{val.request} Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>
-                    <span class="grey">Request Ready: #{val.req_ready} sec</span><br><span style="padding:3px;background-color:#6b5b95;color:white">Size: #{weight.toFixed(2)} KB</span> 
+                div(class="two columns") <span class="request_index_number">Req ##{val.request}</span> <br> Req Start Time: <br> #{val.req_start}ms <br>Total Download Time:<br> #{val.total_download_time} ms <br>
+                    <span class="grey">Request Ready: <br> #{val.req_ready} sec</span><br><span >Size: <span class="total_kb"> #{kb} </span> KB</span><br>Total download till now: <br> ~ #{total_size_till_now_sum} KB
                 div(class="nine columns") <span id="first#{i}" class="first_req" data-req_ready="#{val.req_ready}">#{val.url}</span>
             hr
             - i++
+            
+        div(class="row")
+            div(class="one column")
+            div(class="ten columns" id="total_load") <h3 style="background-color:green;color:white">Total page load: ~ #{total_size_till_now_sum}KB</h3>
+            div(class="one column")
+            hr
+
 
         div(class="row" id="second")
             h1
@@ -76,7 +90,7 @@ html
             each val in lista.entradas.cached
                 div(class="row")
                     div(class="one column" style="background-color: tomato;text-align:center'") &#8291;
-                    div(class="two columns") ##{val.request} Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span class="grey">Request Ready: #{val.req_ready} sec</span> 
+                    div(class="two columns") ##{val.request} Req Start: #{val.req_start}ms <br>Total Download Time:[ #{val.total_download_time} ]ms <br>  <span>Request Ready: #{val.req_ready} sec</span> 
                     div(class="nine columns") <span id="repeated#{i}" class="repeated_req" data-req_ready="#{ val.req_ready}">#{val.url}</span>
                     hr
                     - i++
